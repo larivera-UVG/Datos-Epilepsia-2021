@@ -1,3 +1,1 @@
-Folder para el trabajo de tesis de David Vela.
-
-Testeo de modificación para comit local 
+Dentro de esta carpeta se colocarán de forma provisional los programas generados en Matlab para el trabajo de graduación "Automatización del Proceso de Anotación de Señales EEG de Pacientes con Epilepsia por Medio de Técnicas de Aprendizaje Automático"
