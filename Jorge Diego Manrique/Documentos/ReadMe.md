@@ -1,1 +1,2 @@
-Folder para el trabajo de tesis de Jorge Diego Manrique.
+Diagrama de estructura de base de datos reconstruida en MySQL.
+Imagen de arquitectura preliminar.
