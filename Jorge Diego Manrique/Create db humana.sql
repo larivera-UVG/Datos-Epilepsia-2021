@@ -4,6 +4,12 @@ use humana;
 
 create table if not exists pacientes(
 	id_paciente int not null,
+	primer_nombre varchar(10),
+	segundo_nombre varchar(10),
+	primer_apellido varchar(10),
+	segundo_apellido varchar(10),
+	apellido_casada varchar(10),
+	notas_confidenciales varchar(50),
 	sexo varchar(1) not null,
 	fecha_nacimiento date not null,
 	antecedentes text,
