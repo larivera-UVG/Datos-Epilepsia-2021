@@ -28,14 +28,16 @@ c = 1;
 canales = 1;
 %% Características en tiempo contínuo
 if features == 0
-    op = [1,1,1,1,0,0];
+    op = [1,1,1,1,1,0];
     tic
-    [Matriz_featuresPreictal,~,~] = FeaturesV2(preict,Fs_ict,canales,muestras_ventana,c,op);
+    [Matriz_featuresPreictal,~,~,Windtest] = FeaturesV2(preict,Fs_ict,canales,muestras_ventana,c,op);
     toc
     tic
     [Matriz_featuresInterictal,~,~] = FeaturesV2(interict,Fs_ict,canales,muestras_ventana,c,op);
     toc
+    tic
     [Matriz_featuresSano,~,~] = FeaturesV2(sanodat,Fs_Ubonn,canales,muestras_ventana_Ubonn,c,op);
+    toc
     tic
     [Matriz_featuresIctal,~,~] = FeaturesV2(ictaldat,Fs_Ubonn,canales,muestras_ventana_Ubonn,c,op);
     toc
@@ -69,6 +71,7 @@ Vector_Etiquetas_EEG = [ones(1,300),2*ones(1,300),3*ones(1,300),4*ones(1,300),..
     ones(1,300),2*ones(1,300),3*ones(1,300),4*ones(1,300)];
 Vector_Etiquetas_EEG = Vector_Etiquetas_EEG';
 Vector_Etiquetas_EEG_SVM = zeros(2400,1);
+
 for i=1:2400
         if (Vector_Etiquetas_EEG(i) ==1)
             Vector_Etiquetas_EEG_SVM(i,1) = 1; %Preictal
@@ -99,7 +102,7 @@ end
  end
  
 %Entrenar SVM
-kernel = 'polynomial';%gaussian,linear, polynomial
+kernel = 'linear';%gaussian,linear, polynomial
 t_SVM = templateSVM('Standardize',true,'KernelFunction',kernel);
 model_svm = fitcecoc(datos_entrenamiento,etiquetas_entrenamiento,'Learners',t_SVM,'FitPosterior',true,...
     'Verbose',2);
@@ -109,42 +112,12 @@ Predicted_labels = labelPred;
 test_features = scores;
 Prueba_eti = categorical(etiquetas_prueba');
 Predict_eti = categorical(labelPred');
+
 %Graficar
 plotconfusion(Prueba_eti,Predict_eti);
-
-% [~,cm] = confusion(Prueba_eti,Predict_eti);
-% Pre_11 = cm(1,1);%Preictal correcto
-% Pre_12 = cm(1,2);%Preictal falso (inter)
-% Pre_13 = cm(1,3); %Preictal falso (sano)
-% Pre_14 = cm(1,4);%Preictal falso (ictal)
-% 
-% Inter_21 = cm(2,1);%Interictal falso (preict)
-% Inter_22 = cm(2,2);%Interictal correcto
-% Inter_23 = cm(2,3);%Interictal falso (sano)
-% Inter_24 = cm(2,4);%Interictal falso (ictal)
-% 
-% Sano_31 = cm(3,1);%Sano falso (preict)
-% Sano_32 = cm(3,2);%Sano falso (inter)
-% Sano_33 = cm(3,3);%Sano correcto
-% Sano_34 = cm(3,4);%Sano falso (ictal)
-% 
-% Ictal_41 = cm(4,1);%Ictal falso (preict)
-% Ictal_42 = cm(4,2);%Ictal falso (inter)
-% Ictal_43 = cm(4,3);%Ictal falso (sano)
-% Ictal_44 = cm(4,4);%Ictal correcto
-% 
-% accu = num2str(100*((Pre_11+Inter_22+Sano_33+Ictal_44) / (Pre_11+Pre_12+Pre_13+Pre_14+...
-%     Inter_21+Inter_22+Inter_23+Inter_24+...
-%     Sano_31+Sano_32+Sano_33+Sano_34+...
-%     Ictal_41+Ictal_42+Ictal_43+Ictal_44)))  %Exactitud
-%%
-% load('Patient_1_interictal_segment_0003.mat')
-% interict2 = interictal_segment_3.data(1,:); 
-% [Matriz_featuresInterictal2,~,~,~] = FeaturesV2wavelet(interict2,muestras_ventana,c,madre,n,op);
-% %[Matriz_featuresInterictal2,~,~] = FeaturesV2(interict2,Fs_ict,canales,muestras_ventana,c,op);
-% Vector_Prueba_Inter2 = Matriz_featuresInterictal2;
-% [etiquetas_salida_set2, scores2] = predict(model_svm, Vector_Prueba_Inter2); 
-% Vector_Etiquetas_reales = 2*ones(600,1);
-% Prueba_eti2 = categorical(Vector_Etiquetas_reales');
-% Predict_eti2 = categorical(etiquetas_salida_set2');
-% plotconfusion(Prueba_eti2,Predict_eti2)
+plotconfusion(Prueba_eti,Predict_eti,{'Matriz de Confusión'});
+            set(gca,'xticklabel',{'Ictal' 'Sano' 'Preictal' 'Interictal' 'Exactitud'})
+            set(gca,'yticklabel',{'Ictal' 'Sano' 'Preictal' 'Interictal' ''})
+matriz = confusionmat(Prueba_eti,Predict_eti);
+s = sum(matriz);
+exactitud = 100*(matriz(1,1)+matriz(2,2)+matriz(3,3)+matriz(4,4))/(s(1)+s(2)+s(3)+s(4))
