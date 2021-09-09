@@ -1,23 +1,23 @@
 use humana;
 
-#drop table analisis;
-#drop table paciente_datos_personales;
+drop table analisis;
+drop table resultados_analisis;
 
-create table if not exists analisis(
-	id_analisis int not null auto_increment,
-	fecha_analisis date not null,
+create table if not exists modelo(
+	id_modelo int not null auto_increment,
+	fecha_modelo date not null,
 	realizado_por varchar(50) not null,
 	modelo_utilizado varchar(20) not null,
 	descripcion varchar(50),
 	notas varchar(50),
 	id_prueba int not null,
-	primary key (id_analisis),
+	primary key (id_modelo),
 	constraint fk_prueba foreign key (id_prueba) references pruebas(id_prueba)
 );
 
-create table if not exists resultados_analisis(
+create table if not exists resultados_modelo(
 	id int not null auto_increment,
-	id_analisis int not null,
+	id_modelo int not null,
 	mav float,
 	zc int,
 	type1_error int,
@@ -30,5 +30,5 @@ create table if not exists resultados_analisis(
 	MAE float,
 	R2 float,
 	primary key (id),
-	constraint fk_analisis foreign key (id_analisis) references analisis(id_analisis)
+	constraint fk_modelo foreign key (id_modelo) references modelo(id_modelo)
 );
