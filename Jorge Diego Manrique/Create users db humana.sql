@@ -28,3 +28,5 @@ grant select on humana.resultados_analisis to sec2;
 show grants for adm;
 show grants for sec1;
 show grants for sec2;
+
+select user, account_locked from mysql.user where account_locked != 'Y';
