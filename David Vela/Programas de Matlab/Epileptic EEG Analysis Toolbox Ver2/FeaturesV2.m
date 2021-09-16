@@ -77,20 +77,24 @@ umbral = max(max_amplitud);
 for i=1:canales
    z(:,i) =  ZC(channels(:,i),umbral)'; %Calcular todos los ZC de la señal
 end
+i=1;
 while(1)
      
     channel_ventana(i,k) = channels(i,k); 
     i = i+1;   
     if(mod(i,(muestras))==0)      %Calcular caracteristicas de cada ventana
+        %WindowSignal es un canal de la señal; dimension n x 1
         window_signal = channel_ventana((j*muestras)+1:i,k);
         flag = flag+1;
         
         if op(1) == 1
          desviacion(flag,k) = std(channel_ventana(:,k));
+         %desviacion(flag,k) = std(window_signal);
         end
         
         if op(2) == 1
          curtosis(flag,k) = kurtosis(channel_ventana(:,k));
+         %curtosis(flag,k) = kurtosis(window_signal);
         end
         
         if op(4) == 1
@@ -106,7 +110,7 @@ while(1)
                 if (ventana_EA*muestas_ventana_EA<highbound)
                     break
                 end
-              eac(flag,k)=eac(flag,k)+var(window_signal(lowbound:highbound,k));
+              eac(flag,k)=eac(flag,k)+var(window_signal(lowbound:highbound,1));
             end
         end
         if op(6) == 1
