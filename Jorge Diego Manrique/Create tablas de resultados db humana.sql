@@ -1,8 +1,5 @@
 use humana;
 
-drop table analisis;
-drop table resultados_analisis;
-
 create table if not exists modelo(
 	id_modelo int not null auto_increment,
 	fecha_modelo date not null,

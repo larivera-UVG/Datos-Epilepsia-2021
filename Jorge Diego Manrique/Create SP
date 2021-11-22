@@ -1,0 +1,50 @@
+#Copiar y pegar los siguientes comandos en la linea de comando de mysql
+#1
+use humana
+
+#2
+DELIMITER $$
+
+#3
+#esto ejecutarlo desde matlan
+
+create user if not exists jorge2;
+
+#-
+CREATE PROCEDURE asignarpermisos(in nombre varchar(15), in tipo varchar(15), in admu boolean, in analizar boolean, in ingreso boolean, in consulta boolean, in conultac boolean)
+begin
+	if admu then
+		GRANT ALL PRIVILEGES ON *.* TO jorge2 WITH GRANT OPTION;
+	end if;
+end $$
+
+GRANT ALL PRIVILEGES ON *.* TO nombre WITH GRANT OPTION;
+
+call asignarpermisos('jorge2', 'superuser', true, true, true, true, true);
+#esto ejecutarlo desde matlan
+alter user jorge2 identified by '1234';
+
+drop procedure asignarpermisos;
+grant select on mysql.user to jor;
+drop user jorge;
+delete from humana.usuarios where usuario = 'jorge';
+alter user nombre identified by '1234';
+
+select * from mysql.user;
+select * from humana.usuarios u;
+
+update humana.usuarios u set u.admin_usuarios = false where u.usuario = 'root';
+
+
+#para los que tengan rol de administradores de usuarios
+grant all privileges on humana.usuarios to jor with grant option;
+grant select on mysql.user to jor with grant option;
+grant create user on *.* to jor with grant option;
+
+#para los que tengan rol para analizar pruebas
+pruebas_datos
+pruebas
+analisis
+resultado_analisis
+modelo
+resultados_modelo

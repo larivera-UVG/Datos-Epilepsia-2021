@@ -7,7 +7,7 @@ create table if not exists analisis(
 	realizado_por varchar(50) not null,
 	notas varchar(50),
 	id_prueba int not null,
-	id_paciente int not null,
+	id_paciente varchar(20) not null,
 	canales_utilizados varchar(50) not null, #revisar tipo de dato
 	primary key (id_analisis),
 	constraint fk_prueba_a foreign key (id_prueba) references pruebas(id_prueba),

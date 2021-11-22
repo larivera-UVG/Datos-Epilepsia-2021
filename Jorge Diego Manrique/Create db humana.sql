@@ -1,9 +1,11 @@
+drop database if exists humana;
+
 create database if not exists humana;
 
 use humana;
 
 create table if not exists pacientes(
-	id_paciente int not null,
+	id_paciente varchar(20) not null,
 	primer_nombre varchar(10),
 	segundo_nombre varchar(10),
 	primer_apellido varchar(10),
@@ -20,7 +22,7 @@ create table if not exists pacientes(
 
 create table if not exists pruebas(
 	id_prueba int not null auto_increment,
-	id_paciente int not null,
+	id_paciente varchar(20) not null,
 	fecha_prueba date not null,
 	hora_inicio time not null,
 	duracion int not null,
@@ -73,4 +75,13 @@ create table if not exists pruebas_datos(
 	constraint fk_pdatos foreign key (id_prueba) references pruebas(id_prueba)
 );
 
-#drop database if exists humana;
+create table if not exists usuarios(
+	usuario varchar(15),
+	tipo varchar(15),
+	admin_usuarios boolean,
+	analizar_prueba boolean,
+	ingreso_pacientes boolean,
+	consulta_pacientes boolean,
+	consulta_confidencial boolean,
+	primary key (usuario)
+);
