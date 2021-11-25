@@ -2,18 +2,21 @@
 %con una estructura con el nombre requerido para poder ser utilizado en la
 %Epileptic EEG Analysis Toolbox Ver2
 
-function matarray_to_eeg_struct(savename,data_array,slength,fs,inchannels,autod)
-    %savename = Nombre del .mat donde se guardará la estructura 
-    %data_array = array con las señales EEG
-    %slength = duración de la señal en segundos, dejar vacío si desea que
-    %   la función establesta este dato por el usuario
-    %fs = frecuencia de muestreo
-    %channels = array de caracteres con los nombres de los canales
-    %autod = si es 0 toma slength como la duración en segundos de las
-    %   señales, si es 1, las calcula aproximadamente (se dice en caso la
-    %   frecuencia de muestreo esté en decimales)
-    if autod == 0
-        tiempoduracion = slength;
+function matarray_to_eeg_struct(varargin)    
+    %{1}:savename = Nombre del .mat donde se guardará la estructura 
+    %{2}:data_array = array con las señales EEG    
+    %{3}:fs = frecuencia de muestreo
+    %{4}:inchannels = array de caracteres con los nombres de los canales
+    %Opcional:
+    %{5}:slength = duración de la señal en segundos, dejar vacío si desea que
+    %   la función establesta este dato por el usuario. Si no se indica, se
+    %   calcula a partir de la fs y la cantidad de datos.
+    savename = varargin{1};
+    data_array = varargin{2};
+    fs = varargin{3};
+    inchannels = varargin{4};
+    if length(varargin) == 5
+        tiempoduracion = varargin{5};
     else
         tiempoduracion = length(data_array)/fs;
     end

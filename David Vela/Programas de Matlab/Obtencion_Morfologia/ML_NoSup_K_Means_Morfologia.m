@@ -4,25 +4,29 @@
 % 2 -> Usa un .mat Sano
 % 3 -> Usa un .mat Ictal
 % 4 -> Usa un .mat Interictal
-signal_test = 4;
+signal_test = 2;
 
 %% Condicional para la selección de señal
 if (signal_test==1)
     [hdr, record] = edfread('S013R13.edf');
     Fs = 160; %Fs 
     x1 = record;
+    ch_interes = [12,13,14,15];
 elseif (signal_test==2)
     load('Bonn_datasets.mat');
     Fs = 173.61;
     x1 = setAdata';
+    ch_interes = [1];
 elseif (signal_test==3)
     load('Bonn_datasets.mat');
     Fs = 173.61;
     x1 = setEdata';
+    ch_interes = [1];
 elseif (signal_test==4)
     load('Patient_1_interictal_segment_0001.mat');
     Fs = 5000;
     x1 = interictal_segment_1.data';
+    ch_interes = [12,13,14,15];
 end
 s_ventana = 1; %Tiempo en s de la ventana
  if((s_ventana*Fs-round(s_ventana*Fs))<0)
@@ -35,19 +39,25 @@ s_ventana = 1; %Tiempo en s de la ventana
 %i=1;
 %----------------------------------------------------------------------------------------------
 %Encontrar matriz de features 
-Matriz_featuresMorf = FeaturesMorf(x1,Fs,1,muestras);
+Matriz_featuresMorf = FeaturesMorf(x1,Fs,ch_interes,muestras);
 m = 2; %Número de clusters
 %Clustering: K-means en función .m
 [E, ~] = k_means(Matriz_featuresMorf',m,0);
 %K-means Con la función de Matlab:
 idx = kmeans(Matriz_featuresMorf',m);
-%----------------------------------------------------------------------------------------------
-%Graficar Clustering
-j=0;
-for i=1:length(E)
-    Predicted_clusters_km((j*muestras)+1:i*muestras,1) = E(i,1)*ones(muestras,1);
-    j = j+1;
+[~,No_ventanas] = size(Matriz_featuresMorf);
+Etiquetas_Matriz_Morfologia =  zeros(length(ch_interes),No_ventanas);
+for i=1:length(ch_interes)
+    [E, ~] = k_means(Matriz_featuresMorf',m,0);
+    Etiquetas_Matriz_Morfologia(i,:) = E';
 end
+%----------------------------------------------------------------------------------------------
+% %Graficar Clustering
+% j=0;
+% for i=1:length(E)
+%     Predicted_clusters_km((j*muestras)+1:i*muestras,1) = E(i,1)*ones(muestras,1);
+%     j = j+1;
+% end
 % 
 % data = data(1:length(Predicted_clusters_fcm),:);
 % t1=1:length(Predicted_clusters_km);
@@ -75,3 +85,4 @@ end
 % 
 % end
 % 
+[E,Matriz_featuresMorf(1:4,:)']
