@@ -33,6 +33,8 @@ alter user nombre identified by '1234';
 select * from mysql.user;
 select * from humana.usuarios u;
 
+select u.`User`, u2.tipo, u.authentication_string, u.account_locked, u2.admin_usuarios, u2.analizar_prueba, u2.ingreso_pacientes, u2.consulta_pacientes, u2.consulta_confidencial from mysql.user u, humana.usuarios u2 where u.`User` = u2.usuario;
+
 update humana.usuarios u set u.admin_usuarios = false where u.usuario = 'root';
 
 
