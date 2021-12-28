@@ -32,3 +32,10 @@ show grants for sec2;
 select user, account_locked from mysql.user where account_locked != 'Y';
 
 grant all privileges on humana.usuarios to jor;
+
+grant update (primer_login) on humana.usuarios to tote;
+
+
+grant all PRIVILEGES (id_paciente, sexo, fecha_nacimiento, antecedentes, diagnostico, condicion) on humana.pacientes to sec1;
+
+GRANT ALL PRIVILEGES (id_paciente, sexo, fecha_nacimiento, antecedentes, diagnostico, condicion) ON humana.pacientes to todo;
