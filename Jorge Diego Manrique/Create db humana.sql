@@ -83,5 +83,8 @@ create table if not exists usuarios(
 	ingreso_pacientes boolean,
 	consulta_pacientes boolean,
 	consulta_confidencial boolean,
+	primer_login boolean,
 	primary key (usuario)
 );
+
+insert into humana.usuarios values ('root','SuperUser', true, true, true, true, true, false);
