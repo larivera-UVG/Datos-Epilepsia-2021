@@ -39,3 +39,5 @@ grant update (primer_login) on humana.usuarios to tote;
 grant all PRIVILEGES (id_paciente, sexo, fecha_nacimiento, antecedentes, diagnostico, condicion) on humana.pacientes to sec1;
 
 GRANT ALL PRIVILEGES (id_paciente, sexo, fecha_nacimiento, antecedentes, diagnostico, condicion) ON humana.pacientes to todo;
+
+select u.authentication_string from mysql.`user` u where `User` = 'koke';
