@@ -41,3 +41,19 @@ grant all PRIVILEGES (id_paciente, sexo, fecha_nacimiento, antecedentes, diagnos
 GRANT ALL PRIVILEGES (id_paciente, sexo, fecha_nacimiento, antecedentes, diagnostico, condicion) ON humana.pacientes to todo;
 
 select u.authentication_string from mysql.`user` u where `User` = 'koke';
+
+REVOKE ALL PRIVILEGES ON humana.usuarios from koke;
+
+grant all privileges on humana.usuarios to sec1;
+
+grant select on humana.usuarios  to sec1;
+
+revoke select on humana.usuarios from sec1;
+
+revoke all privileges on humana.usuarios from sec1;
+
+show grants for koke;
+
+REVOKE ALL privileges, grant option from koke;
+
+drop user sec1;
