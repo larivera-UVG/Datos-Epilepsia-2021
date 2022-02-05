@@ -77,6 +77,7 @@ create table if not exists pruebas_datos(
 
 create table if not exists usuarios(
 	usuario varchar(15),
+	correo varchar(60),
 	tipo varchar(15),
 	admin_usuarios boolean,
 	analizar_prueba boolean,
@@ -90,4 +91,4 @@ create table if not exists usuarios(
 	primary key (usuario)
 );
 
-insert into humana.usuarios values ('root','SuperUser', true, true, true, true, true, true, true, true, false);
+insert into humana.usuarios values ('root','man13600@uvg.edu.gt' ,'SuperUser', true, true, true, true, true, true, true, true, false);
