@@ -93,6 +93,11 @@ create table if not exists usuarios(
 
 insert into humana.usuarios values ('root','man13600@uvg.edu.gt' ,'SuperUser', true, true, true, true, true, true, true, true, false);
 
+create user if not exists resetpass;
+alter user resetpass identified by '2022';
+grant select on humana.usuarios to resetpass;
+grant create user on *.* to resetpass;
+
 /*GMail
  * eeganalysistoolbox@gmail.com
  * uvg@2022

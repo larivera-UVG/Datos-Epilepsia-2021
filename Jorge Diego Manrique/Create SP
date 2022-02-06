@@ -46,6 +46,11 @@ update humana.usuarios u set u.admin_usuarios = false where u.usuario = 'root';
 
 update humana.usuarios u set u.tipo = 'rolex' where u.usuario = 'koke';
 
+create user if not exists resetpass;
+alter user resetpass identified by '2022';
+grant select on humana.usuarios to resetpass;
+GRANT CREATE USER ON *.* TO resetpass;
+alter user luis identified by '2222';
 
 #para los que tengan rol de administradores de usuarios
 grant all privileges on humana.usuarios to jor with grant option;
