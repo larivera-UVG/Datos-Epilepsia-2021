@@ -30,10 +30,11 @@ drop user jorge;
 delete from humana.usuarios where usuario = 'jorge';
 alter user nombre identified by '1234';
 
+select * from mysql.`user` u;
 select * from mysql.user u where u.User not in ('root', 'k4');
 select * from humana.usuarios u;
 
-drop user koke;
+drop user k5;
 delete from humana.usuarios where usuario != 'root';
 
 alter user koke account lock;
@@ -60,3 +61,5 @@ modelo
 resultados_modelo
 
 delete from humana.usuarios u where u.usuario = 'koke';
+
+drop table humana.usuarios;

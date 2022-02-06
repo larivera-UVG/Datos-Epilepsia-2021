@@ -92,3 +92,8 @@ create table if not exists usuarios(
 );
 
 insert into humana.usuarios values ('root','man13600@uvg.edu.gt' ,'SuperUser', true, true, true, true, true, true, true, true, false);
+
+/*GMail
+ * eeganalysistoolbox@gmail.com
+ * uvg@2022
+ */
