@@ -93,10 +93,19 @@ create table if not exists usuarios(
 
 insert into humana.usuarios values ('root','man13600@uvg.edu.gt' ,'SuperUser', true, true, true, true, true, true, true, true, false);
 
+#Crear usuario encargado de la consulta de los correos en recuperar contraseña
 create user if not exists resetpass;
 alter user resetpass identified by '2022';
 grant select on humana.usuarios to resetpass;
 grant create user on *.* to resetpass;
+
+#Crear usuario con permisos de administrador capaz de crear usuarios y asignar permisos
+create user if not exists admin;
+alter user admin identified by '1234';
+GRANT ALL PRIVILEGES ON humana.usuarios TO admin WITH GRANT option;
+GRANT SELECT ON mysql.user TO admin WITH GRANT option;
+GRANT CREATE USER ON *.* TO admin WITH GRANT option;
+insert into humana.usuarios values ('admin','man13600@uvg.edu.gt' ,'SuperUser', true, true, true, true, true, true, true, true, false);
 
 /*GMail
  * eeganalysistoolbox@gmail.com
