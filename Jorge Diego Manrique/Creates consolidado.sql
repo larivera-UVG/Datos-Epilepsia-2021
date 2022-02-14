@@ -88,7 +88,7 @@ create table if not exists usuarios(
 	primary key (usuario)
 );
 
-insert into humana.usuarios values ('root','man13600@uvg.edu.gt' ,'SuperUser', true, true, true, true, true, true, true, true, false);
+insert into humana.usuarios values ('root','man13600@uvg.edu.gt' ,'Super User', true, true, true, true, true, true, true, true, false);
 
 #Crear usuario encargado de la consulta de los correos en recuperar contraseña
 create user if not exists resetpass;
@@ -102,7 +102,62 @@ alter user admin identified by '1234';
 GRANT ALL PRIVILEGES ON humana.usuarios TO admin WITH GRANT option;
 GRANT SELECT ON mysql.user TO admin WITH GRANT option;
 GRANT CREATE USER ON *.* TO admin WITH GRANT option;
-insert into humana.usuarios values ('admin','man13600@uvg.edu.gt' ,'SuperUser', true, true, true, true, true, true, true, true, false);
+insert into humana.usuarios values ('admin','man13600@uvg.edu.gt' ,'Super User', true, true, true, true, true, true, true, true, false);
+
+create table if not exists analisis(
+	id_analisis int not null auto_increment,
+	fecha date not null,
+	realizado_por varchar(50) not null,
+	notas varchar(50),
+	id_prueba int not null,
+	id_paciente varchar(20) not null,
+	canales_utilizados varchar(50) not null, #revisar tipo de dato
+	primary key (id_analisis),
+	constraint fk_prueba_a foreign key (id_prueba) references pruebas(id_prueba),
+	constraint fk_paciente_a foreign key (id_paciente) references pruebas(id_paciente)
+);
+
+create table if not exists resultados_analisis(
+	id_resultados int not null auto_increment,
+	id_analisis int not null,
+	canal int not null,
+	inicio_vector int not null,
+	fin_vector int not null,
+	clasificación varchar(50) not null,
+	primary key (id_resultados),
+	constraint fk_analisis foreign key (id_analisis) references analisis(id_analisis)
+);
+
+create table if not exists modelo(
+	id_modelo int not null auto_increment,
+	fecha_modelo date not null,
+	realizado_por varchar(50) not null,
+	modelo_utilizado varchar(20) not null,
+	descripcion varchar(50),
+	notas varchar(50),
+	id_prueba int not null,
+	primary key (id_modelo),
+	constraint fk_prueba foreign key (id_prueba) references pruebas(id_prueba)
+);
+
+create table if not exists resultados_modelo(
+	id int not null auto_increment,
+	id_modelo int not null,
+	mav float,
+	zc int,
+	type1_error int,
+	type2_error int,
+	Specificity float, #true negatives rate
+	AUC float,
+	AUC_Class varchar(10),
+	MSE float,
+	RMSE float,
+	MAE float,
+	R2 float,
+	primary key (id),
+	constraint fk_modelo foreign key (id_modelo) references modelo(id_modelo)
+);
+
 
 /*GMail
  * eeganalysistoolbox@gmail.com
