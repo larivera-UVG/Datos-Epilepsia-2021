@@ -34,7 +34,14 @@ select * from mysql.`user` u;
 select * from mysql.user u where u.User not in ('root', 'k4');
 select * from humana.usuarios u;
 
-drop user k5;
+select * from humana.pacientes p;
+select * from humana.pruebas p ;
+select * from humana.pruebas_datos pd;
+
+drop user jorge;
+drop user luis;
+drop user luis2;
+drop user resetpass;
 delete from humana.usuarios where usuario != 'root';
 
 alter user koke account lock;

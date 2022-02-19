@@ -1,5 +1,8 @@
 drop database if exists humana;
 
+drop user if exists resetpass;
+drop user if exists admin;
+
 create database if not exists humana;
 
 use humana;
@@ -90,20 +93,6 @@ create table if not exists usuarios(
 
 insert into humana.usuarios values ('root','man13600@uvg.edu.gt' ,'Super User', true, true, true, true, true, true, true, true, false);
 
-#Crear usuario encargado de la consulta de los correos en recuperar contraseña
-create user if not exists resetpass;
-alter user resetpass identified by '2022';
-grant select on humana.usuarios to resetpass;
-grant create user on *.* to resetpass;
-
-#Crear usuario con permisos de administrador capaz de crear usuarios y asignar permisos
-create user if not exists admin;
-alter user admin identified by '1234';
-GRANT ALL PRIVILEGES ON humana.usuarios TO admin WITH GRANT option;
-GRANT SELECT ON mysql.user TO admin WITH GRANT option;
-GRANT CREATE USER ON *.* TO admin WITH GRANT option;
-insert into humana.usuarios values ('admin','man13600@uvg.edu.gt' ,'Super User', true, true, true, true, true, true, true, true, false);
-
 create table if not exists analisis(
 	id_analisis int not null auto_increment,
 	fecha date not null,
@@ -157,6 +146,34 @@ create table if not exists resultados_modelo(
 	primary key (id),
 	constraint fk_modelo foreign key (id_modelo) references modelo(id_modelo)
 );
+
+create table if not exists config(
+	correo varchar(500) not null,
+	pass varchar(500) not null,
+	asunto varchar(100) not null,
+	mensaje_1 varchar(500) not null,
+	mensaje_2 varchar(500) not null,
+	server varchar(500) not null
+);
+
+#IMPORTANTE: ESTA TABLA SOLO DEBE TENER UN REGISTRO.
+insert into humana.config values('eeganalysistoolbox@gmail.com','uvg@2022','EEG Analysis Toolbox - Recuperar contraseña','->','Puedes cambiarla en cualquier momento en la
+pantalla de configuración después de iniciar sesión.','smtp.gmail.com');
+
+#Crear usuario encargado de la consulta de los correos en recuperar contraseña
+create user if not exists resetpass;
+alter user resetpass identified by '2022';
+grant select on humana.config to resetpass;
+grant select on humana.usuarios to resetpass;
+grant create user on *.* to resetpass;
+
+#Crear usuario con permisos de administrador capaz de crear usuarios y asignar permisos
+create user if not exists admin;
+alter user admin identified by '1234';
+GRANT ALL PRIVILEGES ON humana.usuarios TO admin WITH GRANT option;
+GRANT SELECT ON mysql.user TO admin WITH GRANT option;
+GRANT CREATE USER ON *.* TO admin WITH GRANT option;
+insert into humana.usuarios values ('admin','man13600@uvg.edu.gt' ,'Super User', true, true, true, true, true, true, true, true, false);
 
 
 /*GMail
