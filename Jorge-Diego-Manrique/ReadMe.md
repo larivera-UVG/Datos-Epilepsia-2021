@@ -7,7 +7,7 @@
 ## Descarga de  MySQL
 
 1.  Ingresar a https://www.mysql.com/
-2.  Ingresar a Downloads  return
+2.  Ingresar a Downloads\
 ![mysql downloads](/Jorge-Diego-Manrique/descarga_mysql/ingresardownloads.png "Downloads")
 3.  Ingresar a "MySQL Community (GPL) Downloads"
 ![mysql community downloads](/Jorge-Diego-Manrique/descarga_mysql/downloads2.png "Community Downloads")
