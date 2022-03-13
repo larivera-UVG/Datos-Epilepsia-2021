@@ -1,17 +1,17 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="39700704" file="C:\Users\jmanrique\Documents\GitHub\Datos-Epilepsia-2021\Jorge-Diego-Manrique\App Designer\EpilepticEEGAnalysisToolbox.prj" location="C:\Users\jmanrique\Documents\GitHub\Datos-Epilepsia-2021\Jorge-Diego-Manrique\App Designer" name="EpilepticEEGAnalysisToolbox" preferred-package-location="C:\Users\jmanrique\Documents\GitHub\Datos-Epilepsia-2021\Jorge Diego Manrique\App Designer\EpilepticEEGAnalysisToolbox\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration file="C:\Users\jmanrique\Documents\GitHub\Datos-Epilepsia-2021\Jorge-Diego-Manrique\App Designer\EpilepticEEGAnalysisToolbox.prj" location="C:\Users\jmanrique\Documents\GitHub\Datos-Epilepsia-2021\Jorge-Diego-Manrique\App Designer" name="EpilepticEEGAnalysisToolbox" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>EpilepticEEGAnalysisToolbox</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
     <param.authnamewatermark />
     <param.email />
-    <param.company>UVG</param.company>
+    <param.company />
     <param.summary />
     <param.description />
-    <param.screenshot>${PROJECT_ROOT}\logouvg.jpg</param.screenshot>
+    <param.screenshot />
     <param.guid />
-    <param.installpath.string>\UVG\EpilepticEEGAnalysisToolbox\</param.installpath.string>
+    <param.installpath.string>\EpilepticEEGAnalysisToolbox\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
@@ -48,8 +48,10 @@
       <param.version />
       <param.authnamewatermark />
       <param.email />
+      <param.company />
       <param.summary />
       <param.description />
+      <param.screenshot />
       <param.guid />
       <param.installpath.string />
       <param.installpath.combo />
