@@ -73,7 +73,7 @@
 ```sh
 source <Ruta_del_archivo>\Creates consolidado.sql
 ```
-![mysql modelo3](/Jorge-Diego-Manrique/crear_modelo/3.png "modelo3")
+![mysql modelo3](/Jorge-Diego-Manrique/crear_modelo/3.png "modelo3")\
 4.  Cerrar la ventana cuando termine de ejecutarse el script.
 
 # Instalación del Toolbox.
