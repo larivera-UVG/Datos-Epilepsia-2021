@@ -88,10 +88,11 @@ create table if not exists usuarios(
 	crear_algoritmo boolean,
 	anotaciones_automaticas2 boolean,
 	primer_login boolean,
+	recuperar_contrasena boolean,
 	primary key (usuario)
 );
 
-insert into humana.usuarios values ('root','man13600@uvg.edu.gt' ,'Super User', true, true, true, true, true, true, true, true, false);
+insert into humana.usuarios values ('root','man13600@uvg.edu.gt' ,'Super User', true, true, true, true, true, true, true, true, false, true);
 
 create table if not exists analisis(
 	id_analisis int not null auto_increment,
@@ -157,8 +158,7 @@ create table if not exists config(
 );
 
 #IMPORTANTE: ESTA TABLA SOLO DEBE TENER UN REGISTRO.
-insert into humana.config values('eeganalysistoolbox@gmail.com','uvg@2022','EEG Analysis Toolbox - Recuperar contraseña','->','Puedes cambiarla en cualquier momento en la
-pantalla de configuración después de iniciar sesión.','smtp.gmail.com');
+insert into humana.config values('eeganalysistoolbox@gmail.com','uvg@2022','EEG Analysis Toolbox - Recuperar contraseña','->','Puedes cambiarla en cualquier momento en la pantalla de configuración después de iniciar sesión.','smtp.gmail.com');
 
 #Crear usuario encargado de la consulta de los correos en recuperar contraseña
 create user if not exists resetpass;
@@ -173,7 +173,7 @@ alter user admin identified by '1234';
 GRANT ALL PRIVILEGES ON humana.* TO admin WITH GRANT OPTION;
 GRANT SELECT ON mysql.user TO admin WITH GRANT option;
 GRANT CREATE USER ON *.* TO admin WITH GRANT option;
-insert into humana.usuarios values ('admin','man13600@uvg.edu.gt' ,'Super User', true, true, true, true, true, true, true, true, false);
+insert into humana.usuarios values ('admin','man13600@uvg.edu.gt' ,'Super User', true, true, true, true, true, true, true, true, false, true);
 
 
 /*GMail
