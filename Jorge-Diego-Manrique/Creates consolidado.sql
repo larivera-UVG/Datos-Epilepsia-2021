@@ -170,7 +170,7 @@ grant create user on *.* to resetpass;
 #Crear usuario con permisos de administrador capaz de crear usuarios y asignar permisos
 create user if not exists admin;
 alter user admin identified by '1234';
-GRANT ALL PRIVILEGES ON humana.usuarios TO admin WITH GRANT option;
+GRANT ALL PRIVILEGES ON humana.* TO admin WITH GRANT OPTION;
 GRANT SELECT ON mysql.user TO admin WITH GRANT option;
 GRANT CREATE USER ON *.* TO admin WITH GRANT option;
 insert into humana.usuarios values ('admin','man13600@uvg.edu.gt' ,'Super User', true, true, true, true, true, true, true, true, false);
