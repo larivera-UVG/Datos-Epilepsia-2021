@@ -157,8 +157,8 @@ create table if not exists config(
 	server varchar(500) not null
 );
 
-#IMPORTANTE: ESTA TABLA SOLO DEBE TENER UN REGISTRO.
-insert into humana.config values('eeganalysistoolbox@gmail.com','uvg@2022','EEG Analysis Toolbox - Recuperar contraseña','->','Puedes cambiarla en cualquier momento en la pantalla de configuración después de iniciar sesión.','smtp.gmail.com');
+#IMPORTANTE: ESTA TABLA SOLO DEBE TENER UN REGISTRO. SE DEBE UTILIZAR LA CONTRASEÑA DE APLICACIONES GENERADA EN EL CORREO.
+insert into humana.config values('eeganalysistoolbox@gmail.com','bngaejqiesejarpr','EEG Analysis Toolbox - Recuperar contraseña','->','Puedes cambiarla en cualquier momento en la pantalla de configuración después de iniciar sesión.','smtp.gmail.com');
 
 #Crear usuario encargado de la consulta de los correos en recuperar contraseña
 create user if not exists resetpass;
